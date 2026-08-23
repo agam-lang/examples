@@ -1,0 +1,18 @@
+// Agam Example: 03_bayesian_mcmc.agm
+// Probabilistic programming, sample/observe, and Metropolis-Hastings MCMC
+
+import agam_std::probabilistic::{Distribution, BayesianInference};
+
+fn main() {
+    let mut infer = BayesianInference::new(1000);
+
+    // Prior: Normal(0, 1)
+    let prior = Distribution::Normal { mean: 0.0, std_dev: 1.0 };
+    
+    // Likelihood observations
+    let observations = vec![1.2, 1.5, 0.9, 1.1, 1.4];
+
+    let samples = infer.metropolis_hastings(prior, &observations);
+    println("Posterior mean: ${samples.mean()}");
+    println("Posterior variance: ${samples.variance()}");
+}

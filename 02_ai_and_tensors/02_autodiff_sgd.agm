@@ -1,0 +1,25 @@
+// Agam Example: 02_autodiff_sgd.agm
+// First-order optimization with reverse-mode automatic differentiation
+
+import agam_std::ml::{DenseLayer, Sgd};
+import agam_std::tensor::Tensor;
+
+fn main() {
+    let mut layer = DenseLayer::new(4, 2);
+    let mut optimizer = Sgd::new(0.01);
+
+    let input = Tensor::from_vec(vec![1.0, 2.0, 3.0, 4.0], vec![1, 4]);
+    let target = Tensor::from_vec(vec![0.5, 1.5], vec![1, 2]);
+
+    // Forward pass
+    let output = layer.forward(&input);
+    let loss = output.mse_loss(&target);
+
+    println("Initial Loss: ${loss}");
+
+    // Backward pass (Baur-Strassen Reverse Mode AD)
+    let gradients = layer.backward(&output.grad_mse(&target));
+    optimizer.step(&mut layer, &gradients);
+
+    println("Optimizer step complete.");
+}

@@ -1,0 +1,22 @@
+// Agam Example: 02_ebpf_packet_filter.agm
+// In-kernel eBPF packet inspection and verifier-safe filter
+
+import agam_std::ebpf::{EbpfProgram, EbpfMap, PacketContext, Action};
+
+@target.iot
+fn filter_ipv4_packet(ctx: &PacketContext, allowed_ips: &EbpfMap<u32, bool>) -> Action {
+    if ctx.protocol != 0x0800 {
+        return Action::Pass;
+    }
+
+    let src_ip = ctx.source_ipv4;
+    if allowed_ips.lookup(src_ip).unwrap_or(false) {
+        Action::Pass
+    } else {
+        Action::Drop
+    }
+}
+
+fn main() {
+    println("eBPF In-Kernel Packet Filter compiled and verified.");
+}

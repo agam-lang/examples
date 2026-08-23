@@ -1,0 +1,31 @@
+// Agam Example: 02_tile_matrix_multiplication.agm
+// Cooperative Matrix / Tensor Core 16x16 Tile MatMul
+
+import agam_std::gpu::Tile;
+
+@gpu
+@target.hpc
+fn tile_matmul_kernel(
+    a_matrix: &[f32], 
+    b_matrix: &[f32], 
+    c_matrix: &mut [f32],
+    k_dim: usize
+) {
+    let mut acc_tile = Tile::<f32, 16>::zeros();
+
+    let mut k: usize = 0;
+    while k < k_dim {
+        let a_tile = Tile::<f32, 16>::load(a_matrix, k);
+        let b_tile = Tile::<f32, 16>::load(b_matrix, k);
+        
+        // Tensor Core Multiply-Accumulate
+        acc_tile = acc_tile.mma(&a_tile, &b_tile);
+        k = k + 16;
+    }
+
+    acc_tile.store(c_matrix);
+}
+
+fn main() {
+    println("Tile Matrix Multiplication Kernel compiled for SPIR-V Cooperative Matrix.");
+}

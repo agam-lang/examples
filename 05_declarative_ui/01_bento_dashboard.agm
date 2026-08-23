@@ -1,0 +1,36 @@
+// Agam Example: 01_bento_dashboard.agm
+// Reactive Bento Grid Dashboard using @ui macro and fine-grained signals
+
+import agam_ui::reactive::{Signal, Computed};
+import agam_ui::theme::BentoTheme;
+
+@ui
+fn SystemMetricsDashboard() {
+    let cpu_load = Signal::new(42.5);
+    let gpu_temp = Signal::new(65.0);
+    let memory_used = Signal::new(12.4);
+
+    let status_color = Computed::new(|| {
+        if cpu_load.get() > 80.0 {
+            "#EF4444" // Red
+        } else {
+            "#10B981" // Green
+        }
+    });
+
+    bento_grid(columns: 3, theme: BentoTheme::Glassmorphic) {
+        bento_card(title: "CPU Load", span: 1) {
+            metric_view(value: "${cpu_load.get()}%", color: status_color.get());
+        }
+        bento_card(title: "GPU Temperature", span: 1) {
+            metric_view(value: "${gpu_temp.get()}°C", color: "#F59E0B");
+        }
+        bento_card(title: "Memory Footprint", span: 1) {
+            metric_view(value: "${memory_used.get()} GB / 64 GB", color: "#3B82F6");
+        }
+    }
+}
+
+fn main() {
+    println("Bento Grid Declarative UI Component compiled to 120 FPS display list.");
+}

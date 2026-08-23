@@ -1,0 +1,29 @@
+// Agam Example: 01_async_http_server.agm
+// High-performance asynchronous HTTP microservice with JSON payload response
+
+import agam_std::net::{HttpServer, HttpRequest, HttpResponse};
+import agam_std::serial::json;
+
+struct ApiResponse {
+    status: String,
+    compiler: String,
+    active_threads: usize,
+}
+
+async fn handle_request(req: HttpRequest) -> HttpResponse {
+    let payload = ApiResponse {
+        status: "OK".into(),
+        compiler: "Agam v0.1.0-alpha".into(),
+        active_threads: 8,
+    };
+
+    HttpResponse::ok()
+        .header("Content-Type", "application/json")
+        .body(json::to_string(&payload))
+}
+
+async fn main() {
+    let server = HttpServer::bind("0.0.0.0:8080");
+    println("HTTP Server listening on http://0.0.0.0:8080");
+    server.serve(handle_request).await;
+}

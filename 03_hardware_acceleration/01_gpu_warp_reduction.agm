@@ -1,0 +1,27 @@
+// Agam Example: 01_gpu_warp_reduction.agm
+// NVPTX 5-step butterfly warp reduction across 32 threads
+
+@gpu
+@target.hpc
+fn warp_sum_kernel(input: &[i32], output: &mut [i32], length: usize) {
+    let tid = @gpu.thread_id_x();
+    let lane_id = @gpu.lane_id();
+
+    let mut val = if tid < length { input[tid] } else { 0 };
+
+    // 5-step Butterfly Shuffle Reduction (16 -> 8 -> 4 -> 2 -> 1)
+    val = val + @gpu.shuffle_down_sync(0xFFFFFFFF, val, 16);
+    val = val + @gpu.shuffle_down_sync(0xFFFFFFFF, val, 8);
+    val = val + @gpu.shuffle_down_sync(0xFFFFFFFF, val, 4);
+    val = val + @gpu.shuffle_down_sync(0xFFFFFFFF, val, 2);
+    val = val + @gpu.shuffle_down_sync(0xFFFFFFFF, val, 1);
+
+    if lane_id == 0 {
+        let warp_id = tid / 32;
+        output[warp_id] = val;
+    }
+}
+
+fn main() {
+    println("GPU Warp Reduction Kernel compiled for NVPTX.");
+}

@@ -1,0 +1,18 @@
+// Agam Example: 03_post_quantum_crypto.agm
+// NIST FIPS 203 ML-KEM-768 key encapsulation and decapsulation
+
+import agam_std::security::pqc::{MlKem768, KeyPair, Ciphertext};
+
+fn main() {
+    println("Generating NIST ML-KEM-768 post-quantum keypair...");
+    let keypair = MlKem768::generate_keypair();
+
+    println("Encapsulating shared secret...");
+    let (ciphertext, shared_secret_sender) = MlKem768::encapsulate(&keypair.public_key);
+
+    println("Decapsulating shared secret with private key...");
+    let shared_secret_receiver = MlKem768::decapsulate(&ciphertext, &keypair.private_key);
+
+    assert_eq(shared_secret_sender, shared_secret_receiver);
+    println("Post-Quantum Key Exchange Verified Successfully!");
+}
