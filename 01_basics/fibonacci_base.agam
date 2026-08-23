@@ -1,0 +1,14 @@
+@lang.base
+
+# Agam Base Profile: Clean, readable, Python-style syntax
+# Compiles to identical native SSA machine code with zero performance penalty.
+
+def fib(n: i64) -> i64:
+    if n < 2:
+        return n
+    return fib(n - 1) + fib(n - 2)
+
+def main() -> i32:
+    let result = fib(32)
+    print_int(result)
+    return 0
