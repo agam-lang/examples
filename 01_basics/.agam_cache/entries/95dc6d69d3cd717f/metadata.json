@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "id": "95dc6d69d3cd717f",
+  "key": {
+    "source_hash": "b23e54d615865a04",
+    "semantic_hash": "f8662ff17395162c",
+    "backend": "Jit",
+    "opt_level": 0,
+    "runtime_abi": 1,
+    "host_os": "windows",
+    "host_arch": "x86_64",
+    "host_pointer_width": 64,
+    "feature_signature": "jit_profile_v1;strategy=auto-v1;disable_all=false;enable_all=false;optimize_all=false;include=;optimize=;exclude="
+  },
+  "artifact_kind": "ProfileJson",
+  "source_path": "examples/01_basics/02_quicksort_advance.agam",
+  "artifact_name": "02_quicksort_advance.jit_profile.json",
+  "bytes": 650,
+  "created_unix_ms": 1787672904326,
+  "last_used_unix_ms": 1787672904326
+}

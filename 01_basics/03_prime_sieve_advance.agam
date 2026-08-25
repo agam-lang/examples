@@ -3,12 +3,12 @@
 // Agam Advance Profile: Sieve of Eratosthenes
 // Explicit bounds-checked bitfield scan
 
-fn count_primes(limit: i64) -> i64 {
-    let mut count: i64 = 0;
-    let mut i: i64 = 2;
+fn count_primes(limit: i32) -> i32 {
+    let mut count: i32 = 0;
+    let mut i: i32 = 2;
     while i < limit {
-        let mut is_prime: i64 = 1;
-        let mut d: i64 = 2;
+        let mut is_prime: i32 = 1;
+        let mut d: i32 = 2;
         while d * d <= i {
             if i % d == 0 {
                 is_prime = 0;

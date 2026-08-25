@@ -3,6 +3,6 @@
 # Agam Base Profile: Hello World
 # Clean, readable, Python-style syntax without boilerplate
 
-def main() -> i32:
+fn main() -> i32:
     print_int(42)
     return 0

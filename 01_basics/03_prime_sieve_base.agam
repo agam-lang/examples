@@ -3,7 +3,7 @@
 # Agam Base Profile: Sieve of Eratosthenes
 # Direct integer bit manipulation with linear memory scan
 
-def count_primes(limit: i64) -> i64:
+fn count_primes(limit: i32) -> i32:
     let mut count = 0
     let mut i = 2
     while i < limit:
@@ -19,7 +19,7 @@ def count_primes(limit: i64) -> i64:
         i = i + 1
     return count
 
-def main() -> i32:
+fn main() -> i32:
     let total = count_primes(20000)
     print_int(total)
     return 0

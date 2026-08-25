@@ -3,7 +3,7 @@
 # Agam Base Profile: In-Place Quicksort Algorithm
 # Flat memory layout with zero garbage collector overhead
 
-def quicksort_partition(n: i64) -> i64:
+fn quicksort_partition(n: i32) -> i32:
     let mut checksum = 0
     let mut i = 0
     while i < n:
@@ -16,7 +16,7 @@ def quicksort_partition(n: i64) -> i64:
         i = i + 1
     return checksum
 
-def main() -> i32:
+fn main() -> i32:
     let result = quicksort_partition(10000)
     print_int(result)
     return 0

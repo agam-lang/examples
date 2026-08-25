@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "id": "f2d312da36cd64d4",
+  "key": {
+    "source_hash": "af39749a0190e6b7",
+    "semantic_hash": "995ccabb1d4693dd",
+    "backend": "Jit",
+    "opt_level": 0,
+    "runtime_abi": 1,
+    "host_os": "windows",
+    "host_arch": "x86_64",
+    "host_pointer_width": 64,
+    "feature_signature": "jit_profile_v1;strategy=auto-v1;disable_all=false;enable_all=false;optimize_all=false;include=;optimize=;exclude="
+  },
+  "artifact_kind": "ProfileJson",
+  "source_path": "examples/01_basics/01_hello_world_base.agam",
+  "artifact_name": "01_hello_world_base.jit_profile.json",
+  "bytes": 137,
+  "created_unix_ms": 1787672871008,
+  "last_used_unix_ms": 1787672871008
+}
