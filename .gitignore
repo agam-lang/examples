@@ -7,6 +7,10 @@ node_modules/
 *.dll
 *.so
 *.dylib
+*.pdb
+*.ll
+.agam_cache/
+**/.agam_cache/
 
 # IDE
 .idea/

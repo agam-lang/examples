@@ -1,9 +1,0 @@
-{
-  "schema_version": 1,
-  "backend": "jit",
-  "runs": 1,
-  "total_calls": 0,
-  "total_hits": 0,
-  "total_stores": 0,
-  "functions": []
-}
